@@ -2,9 +2,9 @@ docker:
   docker_config_json: ***REMOVED***
   registry_prefix: nexus.spaceapplications.com/repository/docker-eoepca/
   image_name: ap-editor
-  image_tag: 2023-04-06a
+  image_tag: 2023-04-07a
 
 network:
   host: 192.168.49.2.nip.io
 
-
+nodeSelector: {}
