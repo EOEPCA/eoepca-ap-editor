@@ -20,11 +20,23 @@ provides a Graphical User Interface which:
     this, it communicates with the backend in order to open/lock/save/delete Application Packages and their versions.
 
 ## backend
-The Band-end is, on the other hand, responsible for the management the user workspace. It is implemented using the 
+The backend is, on the other hand, responsible for the management the user workspace. It is implemented using the 
 FastAPI library and expose an API to manage the Application Packages of the user Workspace. It exposes the following API endpoints which are used by the frontend to interact with the user workspace:
     
 ![API Endpoints](../assets/architectural_design/api_endpoints.png)
 *<p style="text-align: center;">API Endpoints</p>* 
+
+On the backend the files are stored in a tree structure. Each application is represented by its own directory. All application package versions are stored as individual CWL files in this directory. An example file structure could be the following:
+```
+├── application_package_one
+│   └── version_1.cwl
+└── a_different_application
+    ├── version1__locked.cwl
+    ├── version3.cwl
+    ├── version4.cwl
+    └── version6.cwl
+```
+Locked files are represented on disk with the `__locked`.
 
 ## Future enhancements
 Some features that will be added in the future:

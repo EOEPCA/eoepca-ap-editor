@@ -1,9 +1,9 @@
 import _ from "lodash";
-import {DEFAULT_NAMESPACE, DEFAULT_NS_PREFIX} from "./store/store";
+import { DEFAULT_NAMESPACE, DEFAULT_NS_PREFIX } from "./store/store";
 import Vue from "vue";
 
 export const showNotification = (title, options = {}) => {
-  const {group = 'info', type = 'warn', text = '', duration = 3000} = options;
+  const { group = 'info', type = 'warn', text = '', duration = 3000 } = options;
   Vue.notify({
     title: title,
     text: text,
@@ -32,26 +32,26 @@ export const removeEmpty = (obj) => {
 };
 
 const parseWorkflow = (wfl) => {
-  if (typeof wfl.inputs === 'object') wfl.inputs = Object.entries(wfl.inputs).map(([k, v]) => ({id: k, ...v}));
-  if (typeof wfl.outputs === 'object') wfl.outputs = Object.entries(wfl.outputs).map(([k, v]) => ({id: k, ...v}));
+  if (typeof wfl.inputs === 'object') wfl.inputs = Object.entries(wfl.inputs).map(([k, v]) => ({ id: k, ...v }));
+  if (typeof wfl.outputs === 'object') wfl.outputs = Object.entries(wfl.outputs).map(([k, v]) => ({ id: k, ...v }));
   if (typeof wfl.steps === 'object') {
     wfl.steps = Object.entries(wfl.steps).map(([k, v]) => ({
       id: k,
       ...v,
       'in': typeof v.in === 'object' ? Object.entries(v.in).map(([k, v]) =>
-        ({id: k, ...(typeof v === 'string' ? {source: [v]} : v)})) : v.in,
+        ({ id: k, ...(typeof v === 'string' ? { source: [v] } : v) })) : v.in,
     }));
   }
   wfl.steps = wfl.steps.map(step => {
     step = parseRequirements(step);
     step = parseRequirements(step, 'hints');
-    step.requirements = {...step.hints, ...step.requirements};
+    step.requirements = { ...step.hints, ...step.requirements };
     delete step['hints'];
     return step;
   });
   wfl = parseRequirements(wfl);
   wfl = parseRequirements(wfl, 'hints');
-  wfl.requirements = {...wfl.hints, ...wfl.requirements};
+  wfl.requirements = { ...wfl.hints, ...wfl.requirements };
   delete wfl['hints'];
   return wfl;
 };
@@ -66,10 +66,10 @@ const parseRequirements = (process, attribute = 'requirements') => {
       const classField = current.class;
       if (classField) {
         if (current.class === 'EnvVarRequirement' && Array.isArray(current.envDef)) {
-          current.envDef = current.envDef.reduce((acc, envDef) => ({...acc, [envDef.envName]: envDef.envValue}), {});
+          current.envDef = current.envDef.reduce((acc, envDef) => ({ ...acc, [envDef.envName]: envDef.envValue }), {});
         }
         delete current['class'];
-        return {...acc, [classField]: current};
+        return { ...acc, [classField]: current };
       } else {
         return acc;
       }
@@ -78,18 +78,18 @@ const parseRequirements = (process, attribute = 'requirements') => {
     if (Array.isArray(process[attribute]?.EnvVarRequirement?.envDef)) {
       process[attribute].EnvVarRequirement.envDef =
         process[attribute].EnvVarRequirement.envDef.reduce(
-          (acc, envDef) => ({...acc, [envDef.envName]: envDef.envValue}), {});
+          (acc, envDef) => ({ ...acc, [envDef.envName]: envDef.envValue }), {});
     }
   }
   return process;
 };
 
 const parseCommandLineTool = (clt) => {
-  if (typeof clt.inputs === 'object') clt.inputs = Object.entries(clt.inputs).map(([k, v]) => ({id: k, ...v}));
-  if (typeof clt.outputs === 'object') clt.outputs = Object.entries(clt.outputs).map(([k, v]) => ({id: k, ...v}));
+  if (typeof clt.inputs === 'object') clt.inputs = Object.entries(clt.inputs).map(([k, v]) => ({ id: k, ...v }));
+  if (typeof clt.outputs === 'object') clt.outputs = Object.entries(clt.outputs).map(([k, v]) => ({ id: k, ...v }));
   clt = parseRequirements(clt);
   clt = parseRequirements(clt, 'hints');
-  clt.requirements = {...clt.hints, ...clt.requirements};
+  clt.requirements = { ...clt.hints, ...clt.requirements };
   delete clt['hints'];
   clt.baseCommand = (typeof clt.baseCommand === 'string' ? [clt.baseCommand] : clt.baseCommand) || [];
   clt['arguments'] = (typeof clt['arguments'] === 'string' ? [clt['arguments']] : clt['arguments']) || [];
@@ -155,7 +155,7 @@ export const validateCwlConsistency = (nsPrefix, cwlObject) => {
       'All Workflows and command line tools IDs inside of the $graph must be unique.'
     );
   }
-  for(let i = 0; i < cwlObject[`${nsPrefix}:contributor`].length; i++) {
+  for (let i = 0; i < cwlObject[`${nsPrefix}:contributor`].length; i++) {
     let c = cwlObject[`${nsPrefix}:contributor`][i];
     if (_.isEmpty(c[`${nsPrefix}:name`]) || _.isEmpty(c[`${nsPrefix}:email`]) ||
       _.isEmpty(c[`${nsPrefix}:affiliation`])) {
@@ -177,15 +177,17 @@ export const validateCwlConsistency = (nsPrefix, cwlObject) => {
         `All inputs ids of ${p.class} with id "${p.id}" must be unique.`
       );
 
-    if (p.outputs.some(p => _.isEmpty(p.id)))
-      issues.push(
-        `All outputs ${p.class} with id "${p.id}" must have an ID set, this field is required.`
-      );
-    const pOutputsIds = p.outputs.map(p => p.id).filter(identifier => !_.isEmpty(identifier));
-    if (pOutputsIds.length !== _.uniq(pOutputsIds).length)
-      issues.push(
-        `All outputs ids of ${p.class} with id "${p.id}" must be unique.`
-      );
+    if (p.outputs) {
+      if (p.outputs.some(p => _.isEmpty(p.id)))
+        issues.push(
+          `All outputs ${p.class} with id "${p.id}" must have an ID set, this field is required.`
+        );
+      const pOutputsIds = p.outputs.map(p => p.id).filter(identifier => !_.isEmpty(identifier));
+      if (pOutputsIds.length !== _.uniq(pOutputsIds).length)
+        issues.push(
+          `All outputs ids of ${p.class} with id "${p.id}" must be unique.`
+        );
+    }
 
     if (p.class === 'Workflow') {
       if (p.steps.some(p => _.isEmpty(p.id)))
@@ -203,7 +205,7 @@ export const validateCwlConsistency = (nsPrefix, cwlObject) => {
           issues.push(
             `Some inputs of step "${step.id}" of ${p.class} with id "${p.id}" have no source field.`
           );
-        const clt = _.find(cwlObject.$graph, {class: 'CommandLineTool', id: step.run.replace('#', '')});
+        const clt = _.find(cwlObject.$graph, { class: 'CommandLineTool', id: step.run.replace('#', '') });
         step.in.forEach(input => {
           if (input.id && clt && !clt.inputs.map(inp => inp.id).includes(input.id)) issues.push(
             `Input "${input.id}" in inputs of step "${step.id}" of ${p.class} with id "${p.id}" 
@@ -220,12 +222,14 @@ export const validateCwlConsistency = (nsPrefix, cwlObject) => {
               );
           });
         });
-        step.out.forEach(output => {
-          if (output && clt && !clt.outputs.map(out => out.id).includes(output)) issues.push(
-            `Output "${output}" in outputs of step "${step.id}" of ${p.class} with id "${p.id}" 
-            has no match in outputs of CommandLineTool "${clt.id}".`
-          );
-        });
+        if (step.out !== undefined) {
+          step.out.forEach(output => {
+            if (output && clt && !clt.outputs.map(out => out.id).includes(output)) issues.push(
+              `Output "${output}" in outputs of step "${step.id}" of ${p.class} with id "${p.id}" 
+              has no match in outputs of CommandLineTool "${clt.id}".`
+            );
+          });
+        }
       });
 
       if (p.outputs.some(output => _.isEmpty(output.outputSource)))
@@ -250,32 +254,32 @@ export const validateCwlConsistency = (nsPrefix, cwlObject) => {
 };
 
 export function waitForElm(selector) {
-    return new Promise(resolve => {
-        if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector));
-        }
+  return new Promise(resolve => {
+    if (document.querySelector(selector)) {
+      return resolve(document.querySelector(selector));
+    }
 
-        const observer = new MutationObserver(mutations => {
-            if (document.querySelector(selector)) {
-                resolve(document.querySelector(selector));
-                observer.disconnect();
-            }
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
+    const observer = new MutationObserver(mutations => {
+      if (document.querySelector(selector)) {
+        resolve(document.querySelector(selector));
+        observer.disconnect();
+      }
     });
+
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
 }
 
 export const getURLParam = (param, default_) => {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(param) || default_;
+  const params = new URLSearchParams(window.location.search);
+  return params.get(param) || default_;
 };
 
 export const showApiErrorAsNotification = error => {
   if (error.response.status >= 400) error.response.json().then(errObj =>
-    showNotification('Request Error', {type: 'error', text: errObj.detail, duration: 5000, group: 'global'})
+    showNotification('Request Error', { type: 'error', text: errObj.detail, duration: 5000, group: 'global' })
   );
 };

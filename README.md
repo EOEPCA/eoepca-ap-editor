@@ -4,8 +4,9 @@ EOEPCA Application Package Editor is an interactive editor for the Common Workfl
 build an Application Package following the 
 [OGC Best Practice for Earth Observation Application Package](https://docs.ogc.org/bp/20-089r1.html).
 
-The editor uses FastAPI for the Backend to manage user workspace and application package version and VueJS for the 
-Frontend.
+The editor uses FastAPI for the Backend to manage user workspace and application package version and VueJS for the Frontend.
+
+The documentation can be found [here](https://spaceapplications.github.io/eoepca-ap-editor/current/).
 
 ## Development Environment
 
@@ -53,7 +54,7 @@ docker run -it -p 8080:80 -p 8000:8000 --rm --name ap-editor eo-application-pack
     helm upgrade --kubeconfig kubeconfig --install ap-editor eo-application-package-editor/ --values values/<environment>/values.yaml
     ```
 ## Documentation
-See the documentation page for the latest docs.
+See the [documentation page](https://spaceapplications.github.io/eoepca-ap-editor/current/) for the latest docs.
 
 ## Useful links
 1. [OGC Best Practice for Earth Observation Application Package](https://docs.ogc.org/bp/20-089r1.html)

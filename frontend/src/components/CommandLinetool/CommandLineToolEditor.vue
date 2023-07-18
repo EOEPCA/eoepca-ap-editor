@@ -376,8 +376,8 @@ export default {
     },
     inOutIds() {
       return [
-        ...this.commandLineTool.inputs.map(input => input.id),
-        ...this.commandLineTool.outputs.map(output => output.id)
+        ...this.commandLineTool.inputs ? this.commandLineTool.inputs.map(input => input.id) : [],
+        ...this.commandLineTool.outputs ? this.commandLineTool.outputs.map(output => output.id) : []
       ];
     }
   }
