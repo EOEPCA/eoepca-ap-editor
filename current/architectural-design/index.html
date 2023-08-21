@@ -349,10 +349,20 @@ provides a Graphical User Interface which:</p>
     this, it communicates with the backend in order to open/lock/save/delete Application Packages and their versions.</li>
 </ul>
 <h2 id="backend">backend</h2>
-<p>The Band-end is, on the other hand, responsible for the management the user workspace. It is implemented using the 
+<p>The backend is, on the other hand, responsible for the management the user workspace. It is implemented using the 
 FastAPI library and expose an API to manage the Application Packages of the user Workspace. It exposes the following API endpoints which are used by the frontend to interact with the user workspace:</p>
 <p><img alt="API Endpoints" src="../assets/architectural_design/api_endpoints.png" />
 <em><p style="text-align: center;">API Endpoints</p></em> </p>
+<p>On the backend the files are stored in a tree structure. Each application is represented by its own directory. All application package versions are stored as individual CWL files in this directory. An example file structure could be the following:</p>
+<pre><code>├── application_package_one
+│   └── version_1.cwl
+└── a_different_application
+    ├── version1__locked.cwl
+    ├── version3.cwl
+    ├── version4.cwl
+    └── version6.cwl
+</code></pre>
+<p>Locked files are represented on disk with the <code>__locked</code>.</p>
 <h2 id="future-enhancements">Future enhancements</h2>
 <p>Some features that will be added in the future:
 - The integration of the Editor as an app for the EOEPCA Applicatio Hub
