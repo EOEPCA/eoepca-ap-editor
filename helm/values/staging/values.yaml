@@ -7,7 +7,5 @@ storage:
   storageClassName: managed-nfs-storage
 
 network:
-  host: eoepca-testing.spaceapplications.com
-
-nodeSelector: { "worker-type": "medium"}
+  host: eoepca-staging.spaceapplications.com
 

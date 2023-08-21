@@ -1,8 +1,7 @@
 docker:
-  docker_config_json: ***REMOVED***
   registry_prefix: 
   image_name: ap-editor
-  image_tag: jla-test
+  image_tag: jla-test2
 
 storage:
   storageClassName: standard
