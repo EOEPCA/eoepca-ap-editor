@@ -2,17 +2,17 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://spaceapplications.github.io/eoepca-ap-editor/current/</loc>
-         <lastmod>2023-08-21</lastmod>
+         <lastmod>2023-09-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://spaceapplications.github.io/eoepca-ap-editor/current/architectural-design/</loc>
-         <lastmod>2023-08-21</lastmod>
+         <lastmod>2023-09-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://spaceapplications.github.io/eoepca-ap-editor/current/user-manual/</loc>
-         <lastmod>2023-08-21</lastmod>
+         <lastmod>2023-09-28</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
