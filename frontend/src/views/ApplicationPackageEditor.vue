@@ -30,6 +30,30 @@
         @onSave="workspaceSave"
       />
     </b-modal>
+    <b-modal
+      ref="download-modal"
+      id="download-modal"
+      title="Download Application Package"
+      align-h="end"
+      hide-footer
+      size="md"
+    >
+      <b-form-group label="Application package name">
+        <b-form-input v-model="applicationPackageFilename"> </b-form-input>
+      </b-form-group>
+      <b-btn
+        variant="success"
+        @click="
+          createDownload(
+            $refs.processWrapper.$el.innerText,
+            applicationPackageFilename
+          )
+        "
+      >
+        <fa-icon class="mr-2" icon="download"></fa-icon>
+        <span>Download</span>
+      </b-btn>
+    </b-modal>
     <v-tour
       name="clt-tour"
       :steps="steps"
@@ -179,16 +203,7 @@
               <fa-icon class="mr-2" icon="upload"></fa-icon>
               <span>Upload</span>
             </b-btn>
-            <b-btn
-              variant="success"
-              @click="
-                downloadWrapper(
-                  $refs.processWrapper.$el.innerText,
-                  appPackageName,
-                  appPackageVersion
-                )
-              "
-            >
+            <b-btn variant="success" @click="showDownloadModal()">
               <fa-icon class="mr-2" icon="download"></fa-icon>
               <span>Download</span>
             </b-btn>
@@ -391,6 +406,7 @@ export default {
       selectedInput: undefined,
       idx: undefined,
       currentTab: 0,
+      applicationPackageFilename: undefined,
     };
   },
   mounted() {
@@ -449,9 +465,12 @@ export default {
       this.$refs.file.value = ""; // Clear the file to allow change detection when same file is re-uploaded
     },
     downloadWrapper(data, appName, appVersion) {
+      this.createDownload(data, `${appName}__${appVersion}.cwl`);
+    },
+    createDownload(data, filename) {
       let mimetype = "text/yaml";
       let blob = new Blob([data], { type: mimetype + ";charset=utf-8" });
-      saveAs(blob, `${appName}__${appVersion}.cwl`);
+      saveAs(blob, filename);
     },
     handleAppPackageNameChange(value) {
       this.$store.dispatch(CHANGE_APP_PACKAGE_NAME, value);
@@ -525,6 +544,12 @@ export default {
     },
     showWorkspaceSaver() {
       this.$refs["ws-save-modal"].show();
+    },
+    showDownloadModal() {
+      this.applicationPackageFilename = this.applicationPackageFilename
+        ? this.applicationPackageFilename
+        : `${this.appPackageName}__${this.appPackageVersion}.cwl`;
+      this.$refs["download-modal"].show();
     },
     loadCwlFile(fileContent, appName, appVersion = "version_1") {
       const yamlObject = this.yamlToObject(fileContent);

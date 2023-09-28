@@ -308,10 +308,13 @@ export default {
       return 'This field must be unique.';
     },
     inOutStepIds() {
+      const inputs = this.workflow.inputs ? this.workflow.inputs.map(input => input.id) : [];
+      const outputs = this.workflow.outputs ? this.workflow.outputs.map(output => output.id) : [];
+      const steps = this.workflow.steps ? this.workflow.steps.map(step => step.id) : [];
       return [
-        ...this.workflow.inputs.map(input => input.id),
-        ...this.workflow.outputs.map(output => output.id),
-        ...this.workflow.steps.map(step => step.id)
+        ...inputs,
+        ...outputs,
+        ...steps
       ];
     }
   }

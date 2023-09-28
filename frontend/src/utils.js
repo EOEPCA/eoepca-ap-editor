@@ -42,13 +42,18 @@ const parseWorkflow = (wfl) => {
         ({ id: k, ...(typeof v === 'string' ? { source: [v] } : v) })) : v.in,
     }));
   }
-  wfl.steps = wfl.steps.map(step => {
-    step = parseRequirements(step);
-    step = parseRequirements(step, 'hints');
-    step.requirements = { ...step.hints, ...step.requirements };
-    delete step['hints'];
-    return step;
-  });
+  if (wfl.steps) {
+    wfl.steps = wfl.steps.map(step => {
+      step = parseRequirements(step);
+      step = parseRequirements(step, 'hints');
+      step.requirements = { ...step.hints, ...step.requirements };
+      delete step['hints'];
+      return step;
+    });
+  } else {
+    wfl.steps = [];
+  }
+
   wfl = parseRequirements(wfl);
   wfl = parseRequirements(wfl, 'hints');
   wfl.requirements = { ...wfl.hints, ...wfl.requirements };
@@ -167,15 +172,20 @@ export const validateCwlConsistency = (nsPrefix, cwlObject) => {
   cwlObject.$graph.forEach(p => {
     if (!['Workflow', 'CommandLineTool'].includes(p.class)) return;
 
-    if (p.inputs.some(p => _.isEmpty(p.id)))
-      issues.push(
-        `All inputs of ${p.class} with id "${p.id}" must have an ID set, this field is required.`
-      );
-    const pInputsIds = p.inputs.map(p => p.id).filter(identifier => !_.isEmpty(identifier));
-    if (pInputsIds.length !== _.uniq(pInputsIds).length)
-      issues.push(
-        `All inputs ids of ${p.class} with id "${p.id}" must be unique.`
-      );
+    if (!p.inputs) {
+      issues.push(`${p.class} with id "${p.id}" has no inputs.`);
+    } else {
+      if (p.inputs.some(p => _.isEmpty(p.id)))
+        issues.push(
+          `All inputs of ${p.class} with id "${p.id}" must have an ID set, this field is required.`
+        );
+      const pInputsIds = p.inputs.map(p => p.id).filter(identifier => !_.isEmpty(identifier));
+      if (pInputsIds.length !== _.uniq(pInputsIds).length)
+        issues.push(
+          `All inputs ids of ${p.class} with id "${p.id}" must be unique.`
+        );
+    }
+
 
     if (p.outputs) {
       if (p.outputs.some(p => _.isEmpty(p.id)))
@@ -232,22 +242,26 @@ export const validateCwlConsistency = (nsPrefix, cwlObject) => {
         }
       });
 
-      if (p.outputs.some(output => _.isEmpty(output.outputSource)))
-        issues.push(
-          `Some outputs of step of ${p.class} with id "${p.id}" have no output source field.`
-        );
+      if (!p.outputs) {
+        issues.push(`${p.class} with id "${p.id}" has no outputs.`);
+      } else {
+        if (p.outputs.some(output => _.isEmpty(output.outputSource)))
+          issues.push(
+            `Some outputs of step of ${p.class} with id "${p.id}" have no output source field.`
+          );
 
-      p.outputs.forEach(output => {
-        if (_.isEmpty(output.outputSource)) return;
-        output.outputSource.forEach(outputSource => {
-          let [pId, outId] = outputSource.split('/');
-          const steps = p.steps.filter(step => step.id === pId);
-          if (steps.length === 0 || steps[0].out.filter(output => output === outId).length === 0)
-            issues.push(
-              `Output Source "${outputSource}" in outputs of ${p.class} with id "${p.id}" is unknown.`
-            );
+        p.outputs.forEach(output => {
+          if (_.isEmpty(output.outputSource)) return;
+          output.outputSource.forEach(outputSource => {
+            let [pId, outId] = outputSource.split('/');
+            const steps = p.steps.filter(step => step.id === pId);
+            if (steps.length === 0 || steps[0].out.filter(output => output === outId).length === 0)
+              issues.push(
+                `Output Source "${outputSource}" in outputs of ${p.class} with id "${p.id}" is unknown.`
+              );
+          });
         });
-      });
+      }
     }
   });
   return issues;
