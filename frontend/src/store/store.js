@@ -22,6 +22,7 @@ const initialEditorState = () => ({
   nsPrefix: DEFAULT_NS_PREFIX,
   appPackageName: 'application_package_name',
   appPackageVersion: 'version_1',
+  validationResponse: {},
   cwlObject: {
     cwlVersion: 'v1.0',
     $graph: [
@@ -72,6 +73,9 @@ export const store = new Vuex.Store({
     },
     appPackageVersion(state) {
       return state.appPackageVersion;
+    },
+    validationResponse(state) {
+      return state.validationResponse;
     },
     nsPrefix(state) {
       return state.nsPrefix;
@@ -125,6 +129,9 @@ export const store = new Vuex.Store({
     [mutationTypes.CHANGE_APP_PACKAGE_VERSION](state, fileVersion) {
       state.appPackageVersion = fileVersion;
       document.title = `${state.appPackageName} - ${state.appPackageVersion}`;
+    },
+    [mutationTypes.CHANGE_VALIDATION_RESPONSE](state, newResponse) {
+      state.validationResponse = newResponse;
     },
     [mutationTypes.CHANGE_NS_PREFIX](state, nsPrefix) {
       Vue.set(state.cwlObject, `${nsPrefix}:softwareVersion`, state.cwlObject[`${state.nsPrefix}:softwareVersion`]);
@@ -235,6 +242,9 @@ export const store = new Vuex.Store({
     },
     [actionTypes.CHANGE_APP_PACKAGE_VERSION]({commit}, fileVersion) {
       commit(mutationTypes.CHANGE_APP_PACKAGE_VERSION, fileVersion);
+    },
+    [actionTypes.CHANGE_VALIDATION_RESPONSE]({commit}, newResponse) {
+      commit(mutationTypes.CHANGE_VALIDATION_RESPONSE, newResponse);
     },
     [actionTypes.CHANGE_NS_PREFIX]({commit}, nsPrefix) {
       commit(mutationTypes.CHANGE_NS_PREFIX, nsPrefix);

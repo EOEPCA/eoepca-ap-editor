@@ -4,6 +4,7 @@ from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from typing import List
 from pydantic import BaseModel
+from ap_validator.app_package import AppPackage
 import os
 import shutil
 
@@ -15,6 +16,12 @@ FILE_SYSTEM_BASE_PATH = os.getenv(
 )
 
 ILLEGAL_SYMBOLS = [":", "/", "|", "\\", "__locked", ".", ";", ","]
+
+VALIDATION_LEVELS = {
+    "error": ["error"],
+    "hint": ["error", "hint"],
+    "note": ["error", "hint", "note"]
+} 
 
 # TODO This is only needed for development
 ALLOWED_ORIGINS = ["http://localhost:8080"]
@@ -53,6 +60,26 @@ async def list_application_packages() -> List[str]:
         if f.is_dir()
     ]
     return ap_slugs
+
+
+@app.post("/aps/validate")
+async def validate_application_package(request: Request):
+    try:
+        cwl = await request.json()
+        level = cwl.get("level", "error")
+        levels = VALIDATION_LEVELS.get(level, VALIDATION_LEVELS["error"])
+        ap = AppPackage.from_string(cwl["cwl"])
+        return ap.check_all(include=levels)
+    except Exception as ex:
+        return {
+            "valid": False,
+            "issues": [
+                {
+                    "type": "syntax",
+                    "message": str(ex)
+                }
+            ]
+        }
 
 
 @app.get("/aps/{ap_slug}/versions/")

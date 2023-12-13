@@ -28,16 +28,16 @@
       </div>
       <div v-if="type==='ResourceRequirement'" class="p-3" style="background-color: rgba(231,231,231,0.56)">
         <b-form-group label="Cores Min:">
-          <b-form-input v-model="requirement.coresMin" type="number"/>
+          <b-form-input v-model.number="requirement.coresMin" type="number"/>
         </b-form-group>
         <b-form-group label="Cores Max:">
-          <b-form-input v-model="requirement.coresMax" type="number"/>
+          <b-form-input v-model.number="requirement.coresMax" type="number"/>
         </b-form-group>
         <b-form-group label="Ram Min:">
-          <b-form-input v-model="requirement.ramMin" type="number"/>
+          <b-form-input v-model.number="requirement.ramMin" type="number"/>
         </b-form-group>
         <b-form-group label="Ram Max:">
-          <b-form-input v-model="requirement.ramMax" type="number"/>
+          <b-form-input v-model.number="requirement.ramMax" type="number"/>
         </b-form-group>
       </div>
       <div v-if="type==='EnvVarRequirement'" class="p-3" style="background-color: rgba(231,231,231,0.56)">

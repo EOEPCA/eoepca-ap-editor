@@ -22,7 +22,7 @@
         <b-form-input v-model="input.default" type="text"/>
       </b-form-group>
       <b-form-group label="Label:" v-b-tooltip.hover.window.html="getHelper('label')">
-        <b-form-input v-model="input.label" type="text" @keydown.space.prevent/>
+        <b-form-input v-model="input.label" type="text"/>
       </b-form-group>
       <b-form-group label="Description:" v-b-tooltip.hover.window.html="getHelper('description')">
         <b-form-textarea v-model="input.doc" rows="3" max-rows="6"/>

@@ -12,10 +12,11 @@ with it.
 | SpaceApps     |Bernard Valentin   |bernard.valentin@spaceapplications.com |
 | SpaceApps     |Mounir Hafif       |mounir.hafif@spaceapplications.com     |
 | SpaceApps     |Jannes Lathouwers  |jannes.lathouwers@spaceapplications.com|
+| SpaceApps     |Patrick Laport     |patrick.laport@spaceapplications.com   |
 
 **Online version**
 
-An online version of this documentation is available at <https://spaceapplications.github.io/eoepca-ap-editor/>
+An online version of this documentation is available at <https://eoepca.github.io/eoepca-ap-editor/>
 
 **Abbreviations and Acronyms**
 
@@ -154,16 +155,43 @@ The file management section provides users with a set of actions to
 perform on the Application Package CWL file that is generated/edited by
 the editor. The possible actions are shown in the *File Management Action* figure.
 
-![File Management Action](../assets/user_manual/file_manager_actions.png)
-*<p style="text-align: center;">File Management Action</p>*
+![File Management Actions](../assets/user_manual/file_manager_actions.png)
+*<p style="text-align: center;">File Management Actions</p>*
 
-#### Helper Action
+#### Validation
 
-The validate button allows users at any moment during the edition of
-their Application Package to check that the generated CWL file is valid.
-Note that this validation is also done every time the users open a new
-Application Package and a list of validation problems will be shown to
-the user as an error notification.
+The Validate button allows users at any moment during the editing of
+their Application Package to verify that the generated CWL file is valid
+against the CWL schema and the OGC BP EO Application Package requirements.
+Note that this validation is also performed each time the users open a new
+Application Package in the editor.
+
+The button and its associated menu allow checking the AP against three levels
+of requirements, which results in three types of responses: errors, hints and
+notes.
+
+Clicking the Validate button performs the verification at error level. In
+that case the report may only contains errors, but not hints and notes.
+
+To obtain hints and notes, expand the Validate menu and select the entry
+corresponding to the desired level: "Include hints" or "Include hints and
+notes". In all cases, errors are detected.
+
+![Validation Menu](../assets/user_manual/validation_menu.png)
+*<p style="text-align: center;">Application Package Validation Menu</p>*
+
+When the validation report is not empty, this is displayed in a popup box.
+Each entry in the report is associated to the requirement that is not met.
+
+![Validation Report](../assets/user_manual/validation_report.png)
+*<p style="text-align: center;">Application Package Validation Report</p>*
+
+If the validation report is empty, a notification is displayed stating
+that the Application Package CWL is valid.
+
+![Validation Successful](../assets/user_manual/validation_successful.png)
+*<p style="text-align: center;">Application Package Validation Successful</p>*
+
 
 #### Workspace Actions
 
