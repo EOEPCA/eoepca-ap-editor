@@ -1,6 +1,18 @@
 <template>
   <b-container fluid class="my-2 px-4">
     <b-modal
+      @hide="closeValidationReport"
+      ref="validation-report-modal"
+      title="Validation Report"
+      align-h="end"
+      hide-footer
+      size="lg"
+    >
+    <validation-report
+      @onClose="closeValidationReport"
+    />
+    </b-modal>
+    <b-modal
       @hide="closeApExplorer"
       ref="ws-manager-modal"
       title="Application Packages Manager"
@@ -111,7 +123,7 @@
               <b-dropdown-item
                 @click="
                   openNewTab(
-                    'https://spaceapplications.github.io/eoepca-ap-editor/current/',
+                    'https://eoepca.github.io/eoepca-ap-editor/current/',
                     $event
                   )
                 "
@@ -174,10 +186,15 @@
         <b-btn-toolbar class="float-right">
           <div class="m-1 pr-3 pl-3">
             <h6 align="center">Helper</h6>
-            <b-btn variant="primary" @click="validateCwl()">
-              <fa-icon class="mr-2" icon="sync-alt"></fa-icon>
-              <span>Validate</span>
-            </b-btn>
+            <b-dropdown split variant="primary" @click="validateCwl('Errors')">
+              <!--<fa-icon class="mr-2" icon="sync-alt"></fa-icon>-->
+              <template slot="button-content">
+                <fa-icon class="mr-2" icon="sync-alt"></fa-icon>
+                <span>Validate</span>
+              </template>
+              <b-dropdown-item @click="validateCwl('ErrorsAndHints')">Include hints</b-dropdown-item>
+              <b-dropdown-item @click="validateCwl('ErrorsHintsAndNotes')">Include hints and notes</b-dropdown-item>
+            </b-dropdown>
           </div>
           <div class="m-1 pr-3 pl-3">
             <h6 align="center">Workspace</h6>
@@ -360,6 +377,7 @@ import WorkflowEditor from "../components/Workflow/WorkflowEditor";
 import CommandLineToolEditor from "../components/CommandLinetool/CommandLineToolEditor";
 import ApWorkspaceManager from "../components/Workspace/ApWorkspaceManager";
 import ApWorkspaceSaver from "../components/Workspace/ApWorkspaceSaver";
+import ValidationReport from "../components/ValidationReport";
 import {
   getURLParam,
   parseCwlObject,
@@ -373,6 +391,7 @@ import {
   ADD_COMMAND_LINE_TOOL,
   CHANGE_APP_PACKAGE_NAME,
   CHANGE_APP_PACKAGE_VERSION,
+  CHANGE_VALIDATION_RESPONSE,
   REMOVE_COMMAND_LINE_TOOL,
   RESET_EDITOR,
   SET_CWL_OBJECT,
@@ -382,6 +401,7 @@ import { BIcon } from "bootstrap-vue";
 import { guidedTours, guidedToursCallbacks } from "../guidedTour";
 import examples from "../data/examples.json";
 import {
+  validateCwlOnBackend,
   createUpdateApplicationPackageVersion,
   getApplicationPackageVersion,
 } from "../api";
@@ -391,6 +411,7 @@ export default {
   components: {
     ApWorkspaceSaver,
     ApWorkspaceManager,
+    ValidationReport,
     BIcon,
     MetadataEditor,
     WorkflowEditor,
@@ -475,20 +496,49 @@ export default {
     handleAppPackageNameChange(value) {
       this.$store.dispatch(CHANGE_APP_PACKAGE_NAME, value);
     },
-    validateCwl() {
+    validateCwl(validationType) {
       const issues = validateCwlConsistency(this.nsPrefix, this.cwlObject);
       if (issues.length) {
         showNotification("CWL Validation issues", {
-          group: "global",
+          group: "info",
           type: "error",
           text: issues,
           duration: -1,
         });
       } else {
-        showNotification("CWL file is valid", {
-          group: "info",
-          type: "success",
-        });
+        let payload = { cwl: this.$refs.processWrapper.$el.innerText };
+        switch(validationType){
+          case 'Errors':
+            payload = { cwl: this.$refs.processWrapper.$el.innerText , level: "error" };
+            break;
+          case 'ErrorsAndHints':
+            payload = { cwl: this.$refs.processWrapper.$el.innerText , level: "hint" };
+            break;
+          case 'ErrorsHintsAndNotes':
+            payload = { cwl: this.$refs.processWrapper.$el.innerText , level: "note" };
+            break;
+        }
+
+        validateCwlOnBackend(payload).then((validationResponse) => {
+          validationResponse.issues?.sort((a, b) => a.type.localeCompare(b.type));
+          this.$store.dispatch(CHANGE_VALIDATION_RESPONSE, validationResponse);
+          if(validationResponse.issues.length == 0){
+            if(validationType == 'Errors'){
+              showNotification("Your Application Package CWL is valid", {
+                group: "info",
+                type: "success",
+              });
+            } else {
+              showNotification("Your Application Package CWL is valid and all hints are met", {
+                group: "info",
+                type: "success",
+              });
+            }
+          } else {
+            this.showValidationReport();
+          }
+        }
+        ).catch(showApiErrorAsNotification);
       }
     },
     startGuidedTour(tourName) {
@@ -545,6 +595,12 @@ export default {
     showWorkspaceSaver() {
       this.$refs["ws-save-modal"].show();
     },
+    closeValidationReport() {
+      this.$refs["validation-report-modal"].hide();
+    },
+    showValidationReport() {
+      this.$refs["validation-report-modal"].show();
+    },
     showDownloadModal() {
       this.applicationPackageFilename = this.applicationPackageFilename
         ? this.applicationPackageFilename
@@ -559,10 +615,9 @@ export default {
           this.$store.dispatch(
             SET_CWL_OBJECT,
             parseCwlObject(validatedCwlObject)
-          );
+          ).then(() => { this.validateCwl('Errors'); });
           this.$store.dispatch(CHANGE_APP_PACKAGE_NAME, appName);
           this.$store.dispatch(CHANGE_APP_PACKAGE_VERSION, appVersion);
-          this.validateCwl();
         })
         .catch((error) => {
           showNotification("CWL Validator", {
@@ -571,10 +626,10 @@ export default {
             duration: 5000,
             group: "global",
           });
-          this.$store.dispatch(SET_CWL_OBJECT, parseCwlObject(yamlObject));
+          this.$store.dispatch(SET_CWL_OBJECT, parseCwlObject(yamlObject))
+            .then(() => { this.validateCwl('Errors'); });
           this.$store.dispatch(CHANGE_APP_PACKAGE_NAME, appName);
           this.$store.dispatch(CHANGE_APP_PACKAGE_VERSION, appVersion);
-          this.validateCwl();
         });
     },
     workspaceSave(appName, appVersion) {

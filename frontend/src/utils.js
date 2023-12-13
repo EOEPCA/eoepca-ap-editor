@@ -18,7 +18,7 @@ export const removeEmpty = (obj) => {
   if (typeof obj !== 'object') return obj;
   return Object.fromEntries(
     Object.entries(obj)
-      .filter(([, v]) => (typeof v === "boolean" && v) || !_.isEmpty(v))
+      .filter(([, v]) => (typeof v === "number") || (typeof v === "boolean" && v) || !_.isEmpty(v))
       .map(([k, v]) => {
         if (typeof v === 'object' && !keepUnchanged.includes(k)) {
           if (Array.isArray(v)) return [k, v.map(e => removeEmpty(e))];

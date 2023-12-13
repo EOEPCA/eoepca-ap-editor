@@ -47,7 +47,7 @@
       </b-col>
       <b-col sm="3" v-b-tooltip.hover.window.html="getHelper('label')">
         <h6>Label</h6>
-        <b-form-input type="text" v-model="commandLineTool.label" @keydown.space.prevent/>
+        <b-form-input type="text" v-model="commandLineTool.label"/>
       </b-col>
       <b-col sm="3" v-b-tooltip.hover.window.html="getHelper('description')">
         <h6>Description</h6>

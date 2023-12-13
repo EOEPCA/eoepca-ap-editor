@@ -14,6 +14,9 @@ export const urls = {
       lock: (apSlug, versionSlug) => `${ENV_PREFIX}/aps/${apSlug}/versions/${versionSlug}/lock/`,
       unlock: (apSlug, versionSlug) => `${ENV_PREFIX}/aps/${apSlug}/versions/${versionSlug}/unlock/`,
     },
+  },
+  cwlValidation: {
+    validate: () => `${ENV_PREFIX}/aps/validate`
   }
 };
 
@@ -35,3 +38,5 @@ export const deleteApplicationPackage = apSlug =>
   api.delete(urls.applicationPackages.detail(apSlug));
 export const deleteApplicationPackageVersion = (apSlug, versionSlug) =>
   api.delete(urls.applicationPackageVersions.detail.base(apSlug, versionSlug));
+
+export const validateCwlOnBackend = (payload) => api.post(urls.cwlValidation.validate(), payload);

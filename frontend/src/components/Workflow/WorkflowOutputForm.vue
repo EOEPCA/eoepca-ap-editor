@@ -32,7 +32,7 @@
         </b-form-group>
       </div>
       <b-form-group label="Label:" v-b-tooltip.hover.window.html="getHelper('label')">
-        <b-form-input v-model="output.label" type="text" @keydown.space.prevent/>
+        <b-form-input v-model="output.label" type="text"/>
       </b-form-group>
       <b-form-group label="Description:" v-b-tooltip.hover.window.html="getHelper('description')">
         <b-form-textarea v-model="output.doc" rows="3" max-rows="6"/>

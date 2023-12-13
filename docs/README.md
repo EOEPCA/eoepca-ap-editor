@@ -26,8 +26,9 @@ To publish for example version 1.1 and use it as the latest version: `mike deplo
 
     mkdocs.yml    # The configuration file.
     source/
-        index.md             # The documentation homepage.
-        user-manual/index.md # The User Manual documentation page
-        css/                 # Custom CSS style sheets for the documentation
-        assets/              # Assets (images) used in the documentation
-        ...       # Other markdown pages, images and other files.
+        index.md                        # The documentation homepage
+        user-manual/index.md            # The User Manual documentation page
+        architectural-design/index.md   # The Architectural Design page
+        css/                            # Custom CSS style sheets for the documentation
+        assets/                         # Assets (images) used in the documentation
+        ...                             # Other markdown pages, images and other files.
