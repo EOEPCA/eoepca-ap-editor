@@ -1,6 +1,9 @@
 import api from './shared/apiUtils';
 
-const ENV_PREFIX = process.env.NODE_ENV === 'production' ? '/ap-editor/api' : 'http://localhost:8000';
+const ENV_PREFIX =
+  process.env.VUE_APP_ENV === 'application_hub'
+    ? 'api'
+    : process.env.NODE_ENV === 'production' ? '/ap-editor/api' : 'http://localhost:8000';
 
 export const urls = {
   applicationPackages: {
@@ -30,9 +33,9 @@ export const createUpdateApplicationPackageVersion = (apSlug, versionSlug, paylo
   api.put(urls.applicationPackageVersions.detail.base(apSlug, versionSlug), payload);
 
 export const lockApplicationPackageVersion = (apSlug, versionSlug) =>
-  api.patch(urls.applicationPackageVersions.detail.lock(apSlug, versionSlug));
+  api.post(urls.applicationPackageVersions.detail.lock(apSlug, versionSlug));
 export const unlockApplicationPackageVersion = (apSlug, versionSlug) =>
-  api.patch(urls.applicationPackageVersions.detail.unlock(apSlug, versionSlug));
+  api.post(urls.applicationPackageVersions.detail.unlock(apSlug, versionSlug));
 
 export const deleteApplicationPackage = apSlug =>
   api.delete(urls.applicationPackages.detail(apSlug));

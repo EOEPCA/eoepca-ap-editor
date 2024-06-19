@@ -711,7 +711,9 @@ export default {
     },
     locationHref() {
       const appPrefix =
-        process.env.NODE_ENV === "production" ? "/ap-editor" : "";
+        process.env.VUE_APP_ENV === "application_hub"
+          ? ""
+          : process.env.NODE_ENV === "production" ? "/ap-editor" : "";
       return `${window.location.origin}${appPrefix}`;
     },
   },
