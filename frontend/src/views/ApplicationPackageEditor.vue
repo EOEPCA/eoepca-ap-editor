@@ -1,6 +1,19 @@
 <template>
   <b-container fluid class="my-2 px-4">
     <b-modal
+      @hide="closeCltPaster"
+      ref="clt-paste-modal"
+      title="Paste Command Line Tool Definition"
+      align-h="end"
+      hide-footer
+      size="lg"
+    >
+    <command-line-tool-paster
+      ref="clt-paste-modal-comp"
+      @onClose="closeCltPaster"
+    />
+    </b-modal>
+    <b-modal
       @hide="closeValidationReport"
       ref="validation-report-modal"
       title="Validation Report"
@@ -169,14 +182,19 @@
                 1. Application Package Information (Metadata)
               </b-dropdown-item>
               <b-dropdown-item
+                @click="startGuidedTour('pasteProcessingTaskTour')"
+              >
+                2. Paste a Command Line Tool Definition (Processing Task)
+              </b-dropdown-item>
+              <b-dropdown-item
                 @click="startGuidedTour('newProcessingTaskTour')"
               >
-                2. Creation of a new Command Line Tool (Processing Task)
+                3. Creation of a new Command Line Tool (Processing Task)
               </b-dropdown-item>
               <b-dropdown-item
                 @click="startGuidedTour('processingTaskWorkflowIntegration')"
               >
-                3. Command Line Tool Workflow Integration (Workflow)
+                4. Command Line Tool Workflow Integration (Workflow)
               </b-dropdown-item>
             </div>
           </b-dropdown>
@@ -278,6 +296,17 @@
                   <fa-icon icon="plus"></fa-icon>
                   <span class="ml-2">Add Command Line Tool</span>
                 </b-btn>
+                <b-btn
+                  id="clt-paste-btn"
+                  class="ml-2 add-btn"
+                  variant="primary"
+                  ref="pasteCltButton"
+                  @click="showCltPaster"
+                  size="sm"
+                >
+                  <fa-icon icon="plus"></fa-icon>
+                  <span class="ml-2">Paste Command Line Tool</span>
+                </b-btn>
               </b-col>
             </b-row>
             <div class="clt-list accordion">
@@ -375,6 +404,7 @@ import { cwlValidator } from "../cwlObjectValidator";
 import MetadataEditor from "../components/metadata/MetadataEditor";
 import WorkflowEditor from "../components/Workflow/WorkflowEditor";
 import CommandLineToolEditor from "../components/CommandLinetool/CommandLineToolEditor";
+import CommandLineToolPaster from "../components/CommandLinetool/CommandLineToolPasterForm";
 import ApWorkspaceManager from "../components/Workspace/ApWorkspaceManager";
 import ApWorkspaceSaver from "../components/Workspace/ApWorkspaceSaver";
 import ValidationReport from "../components/ValidationReport";
@@ -418,6 +448,7 @@ export default {
     CommandLineToolEditor,
     ApplicationPackageCwlTemplate,
     PageTitle,
+    CommandLineToolPaster,
   },
   data() {
     return {
@@ -583,11 +614,17 @@ export default {
         `${this.locationHref}/?apName=${apName}&apVersion=${apVersion}`
       );
     },
+    closeCltPaster() {
+      this.$refs["clt-paste-modal"].hide();
+    },
     closeApExplorer() {
       this.$refs["ws-manager-modal"].hide();
     },
     closeWorkspaceSaver() {
       this.$refs["ws-save-modal"].hide();
+    },
+    showCltPaster() {
+      this.$refs["clt-paste-modal"].show();
     },
     showApExplorer() {
       this.$refs["ws-manager-modal"].show();

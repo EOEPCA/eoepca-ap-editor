@@ -11,6 +11,6 @@ Graphical User Interface as well as guidelines on how to create your first Appli
 
 **Online version**
 
-An online version of this documentation is available at <https://spaceapplications.github.io/eoepca-ap-editor/>
+An online version of this documentation is available at <https://eoepca.github.io/eoepca-ap-editor/>
 
 [User Manual]: user-manual/index.md

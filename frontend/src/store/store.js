@@ -114,6 +114,11 @@ export const store = new Vuex.Store({
         requirements: {},
       });
     },
+    [mutationTypes.PASTE_COMMAND_LINE_TOOL](state, cltCwl) {
+      console.log("[STORE] PASTE_COMMAND_LINE_TOOL (state, cltCwl)", state, cltCwl);
+      // Insert the CLT CWL in the main graph
+      state.cwlObject.$graph.push(cltCwl);
+    },
     [mutationTypes.REMOVE_COMMAND_LINE_TOOL](state, clt) {
       const index = _.findIndex(state.cwlObject.$graph, clt);
       state.cwlObject.$graph.splice(index, 1);
@@ -229,6 +234,12 @@ export const store = new Vuex.Store({
     },
     [actionTypes.ADD_COMMAND_LINE_TOOL]({commit}) {
       commit(mutationTypes.ADD_COMMAND_LINE_TOOL);
+    },
+    [actionTypes.PASTE_COMMAND_LINE_TOOL]({commit}, cltCwl) {
+      commit(mutationTypes.PASTE_COMMAND_LINE_TOOL, cltCwl);
+      showNotification('Command Line Tool Element Added', {
+        text: 'Please check that the Command Line Tool properties have been added correctly.'
+      });
     },
     [actionTypes.REMOVE_COMMAND_LINE_TOOL]({commit, state}, clt) {
       propagateCltRemoval(state, clt, commit);
