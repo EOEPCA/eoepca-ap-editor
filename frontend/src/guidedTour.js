@@ -3,6 +3,38 @@ import {REMOVE_COMMAND_LINE_TOOL, SET_MODE} from "./store/action-types";
 
 let userMode = 'simple';
 
+let exampleCLT = `class: CommandLineTool
+id: convert
+baseCommand:
+  - convert.sh
+inputs:
+  - id: fn
+    type: string
+    inputBinding:
+      position: 1
+  - id: stac
+    type: Directory
+    inputBinding:
+      prefix: '--stac'
+  - id: size
+    type: string
+    inputBinding:
+      position: 3
+outputs:
+  - id: results
+    type: Directory
+    outputBinding:
+      glob: .
+requirements:
+  DockerRequirement:
+    dockerPull: eoepca/convert:latest`;
+
+function wait(milliseconds){
+  return new Promise(resolve => {
+    setTimeout(resolve, milliseconds);
+  });
+}
+
 export const guidedTours = {
   applicationPackageMetadata: (apEditor) => {
     return [
@@ -32,6 +64,68 @@ export const guidedTours = {
         target: '#ap-meta-namespaces',
         content: 'Define here the namespaces used in this Application Package. Note that the default namespace ' +
           '"https://schema.org/" cannot be removed as it is used for other fields such as authors and contributors',
+      },
+    ];
+  },
+  pasteProcessingTaskTour: (apEditor) => {
+    return [
+      {
+        target: '#clt-tab-title',
+        content: 'Use this tab to configure processing tasks.',
+        before: type => {
+          type === 'previous' ? apEditor.currentTab = 0 : null;
+        }
+      },
+      {
+        target: '#clt-paste-btn',
+        content: 'Click here to paste the definition of an existing processing task (CLT).',
+        before: async type => {
+          document.getElementById('clt-paste-cancel-btn')?.click();
+          apEditor.currentTab = 1;
+          await waitForElm('#clt-paste-btn');
+        }
+      },
+      {
+        target: '#clt-paste-textarea',
+        content: 'Paste here the definition of a CWL Command Line Tool in YAML format.',
+        before: async type => {
+          if (type === 'next') {
+            document.getElementById('clt-paste-btn')?.click();
+            await waitForElm('#clt-paster-form');
+            await wait(300);
+          }
+          if (type === 'previous') {
+            apEditor.$refs["clt-paste-modal-comp"].cltCwl = "";
+            // await apEditor.$refs["clt-paste-modal-comp"].$nextTick();
+            await wait(300);
+          }
+        }
+      },
+      {
+        target: "#clt-paste-add-btn",
+        content: "Click this button to add the Command Line Tool in the editor.",
+        before: async type => {
+          if (type === 'previous') {
+            apEditor.$store.dispatch(
+              REMOVE_COMMAND_LINE_TOOL, apEditor.commandLineTools[apEditor.commandLineTools.length - 1]
+            );
+            document.getElementById('clt-paste-btn')?.click();
+            await waitForElm('#clt-paster-form');
+          }
+          apEditor.$refs["clt-paste-modal-comp"].cltCwl = exampleCLT;
+          // await apEditor.$refs["clt-paste-modal-comp"].$nextTick();
+          await wait(300);
+        }
+      },
+      {
+        target: `#clt-id-${apEditor.idxLastClt}`,
+        content: 'Verify that the Command Line Tool properties have been added correctly. ' +
+          'The CLT may now be integrated in a workflow.',
+        before: async type => {
+          if (type === 'next') {
+            document.getElementById('clt-paste-add-btn')?.click();
+          }
+        }
       },
     ];
   },
@@ -175,6 +269,22 @@ export const guidedToursCallbacks = {
       apEditor.$store.dispatch(SET_MODE, userMode);
       apEditor.guidedTourRunning = false;
     }
+  }),
+  pasteProcessingTaskTour: (apEditor) => ({
+    onStart: () => {
+      userMode = apEditor.$store.state.mode;
+      apEditor.$store.dispatch(SET_MODE, 'advanced');
+    },
+    onStop: () => {
+      apEditor.$store.dispatch(SET_MODE, userMode);
+      apEditor.guidedTourRunning = false;
+      document.getElementById('clt-paste-cancel-btn')?.click();
+      if (apEditor.$refs.cltTour.currentStep >= 4) {
+        apEditor.$store.dispatch(
+          REMOVE_COMMAND_LINE_TOOL, apEditor.commandLineTools[apEditor.commandLineTools.length - 1]
+        );
+      }
+    },
   }),
   newProcessingTaskTour: (apEditor) => ({
     onStart: () => {

@@ -221,7 +221,7 @@ export const validateCwlConsistency = (nsPrefix, cwlObject) => {
             `Input "${input.id}" in inputs of step "${step.id}" of ${p.class} with id "${p.id}" 
             has no match in inputs of CommandLineTool "${clt.id}".`
           );
-          input.source.forEach(source => {
+          input.source?.forEach(source => {
             let [pId, outId] = source.split('/');
             const steps = p.steps.filter(step => step.id === pId);
             if ((!outId && p.inputs.filter(input => input.id === pId).length === 0)
