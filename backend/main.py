@@ -169,7 +169,7 @@ async def create_or_update_application_package_version(
         cwl_file.write(cwl.cwl)
 
 
-@app.patch("/aps/{ap_slug}/versions/{version_slug}/lock/", status_code=204)
+@app.post("/aps/{ap_slug}/versions/{version_slug}/lock/", status_code=204)
 async def lock_application_package_version(ap_slug: str, version_slug: str) -> None:
     # Check if file exists
     cwl_path = os.path.join(FILE_SYSTEM_BASE_PATH, ap_slug, version_slug)
@@ -181,7 +181,7 @@ async def lock_application_package_version(ap_slug: str, version_slug: str) -> N
     os.rename(cwl_path + ".cwl", cwl_path + "__locked.cwl")
 
 
-@app.patch("/aps/{ap_slug}/versions/{version_slug}/unlock/", status_code=204)
+@app.post("/aps/{ap_slug}/versions/{version_slug}/unlock/", status_code=204)
 async def unlock_application_package_version(ap_slug: str, version_slug: str) -> None:
     cwl_path = os.path.join(FILE_SYSTEM_BASE_PATH, ap_slug, version_slug)
 

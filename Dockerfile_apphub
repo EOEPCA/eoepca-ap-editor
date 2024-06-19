@@ -1,0 +1,37 @@
+# build stage
+FROM node:14-buster as build-stage
+WORKDIR /app
+COPY frontend/package*.json frontend/yarn.lock ./
+RUN yarn install
+COPY frontend ./
+RUN yarn run build_hub_application
+
+# production stage
+FROM python:3.12-rc-slim-buster as production-stage
+RUN apt-get -y update && apt-get -y install nginx supervisor curl
+# RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+COPY backend/ /app/backend/
+WORKDIR /app/backend/
+RUN pip install -r requirements.txt
+
+COPY server_apphub.conf /etc/nginx/sites-available/default
+COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+COPY supervisord_apphub.conf /etc/supervisor/supervisord.conf
+
+ARG PUID=1001
+ARG PGID=100
+
+RUN adduser --system --uid ${PUID} --gid ${PGID} jovyan && \
+    # nginx must be able to write in these folders and create /run/nginx.pid
+    chown -R jovyan:users /app /var/log/nginx /var/lib/nginx && \
+    chmod ugo+w /run  && \
+    # jupyterhub v5 requires pydantic v2 but FastAPI requires pydantic v1
+    pip install jhsingle-native-proxy==0.8.2 "jupyterhub<5" "pydantic<2"
+
+ENV AP_EDITOR_FILES_DIRECTORY=/workspace/ap-editor/files/
+EXPOSE 8888
+
+USER jovyan
+
+CMD ["/usr/local/bin/jhsingle-native-proxy", "--port", "8888", "--destport", "8889", "--authtype", "none", "--ready-timeout", "60", "supervisord"]
