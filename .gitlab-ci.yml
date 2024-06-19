@@ -49,6 +49,20 @@ build and push:
     - docker push ${REGISTRY}ap-editor:latest
   when: manual
 
+build and push hub app:
+  stage: release
+  script:
+    # images built for execution in the EOEPCA Application Hub are tagged "app-hub-<hash>" and "app-hub-latest"
+    - export VERSION=app-hub-$(git describe --always)
+    - export $(grep REGISTRY= .env | xargs)
+    - echo "Pushing image version ${VERSION} in default registry (from .env) ${REGISTRY}"
+    - docker build -f Dockerfile_apphub -t ${REGISTRY}ap-editor:${VERSION} .
+    - docker push ${REGISTRY}ap-editor:${VERSION}
+    # latest images reference the last build
+    - docker tag ${REGISTRY}ap-editor:${VERSION} ${REGISTRY}ap-editor:app-hub-latest
+    - docker push ${REGISTRY}ap-editor:app-hub-latest
+  when: manual
+
 deploy on testing:
   stage: deploy
   <<: *testing
