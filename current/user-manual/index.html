@@ -426,6 +426,30 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Command Line Tool">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#creating-command-line-tool-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Creating Command Line Tool Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pasting-command-line-tool-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pasting Command Line Tool Definitions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -568,6 +592,10 @@ with it.</p>
 <td>Application Package</td>
 </tr>
 <tr>
+<td>CLT</td>
+<td>Command Line Tool</td>
+</tr>
+<tr>
 <td>CWL</td>
 <td>Common Workflow Language</td>
 </tr>
@@ -691,8 +719,8 @@ actions as can be seen in the <em>Helper Menu</em> figure:</p>
     Packages Examples directly in the Editor. Users can use these
     examples as a starting template and save them after edition.</li>
 <li><strong>Guided Tours</strong>: Provide users with a set of interactive guided
-    tours that describe and introduce the three main parts of the
-    editor: Metadata, Command Line Tool and Workflow.</li>
+    tours that introduce the main sections and features of the editor:
+    Metadata, Command Line Tool (paste and create) and Workflow.</li>
 </ul>
 <p><img alt="Helper Menu" src="../assets/user_manual/help_menu.png" />
 <em><p style="text-align: center;">Helper Menu</p></em></p>
@@ -784,15 +812,17 @@ well as the schema and namespace that are used in it.</p>
 <p><img alt="Editor Metadata Tab" src="../assets/user_manual/editor_metadata.png" />
 <em><p style="text-align: center;">Editor Metadata Tab</p></em></p>
 <h4 id="command-line-tool">Command Line Tool</h4>
-<p>The Command Line Tool tab of the editor section allows users to add
-multiple processing tasks with the definition of their executable name,
-inputs, outputs and requirements that must be met in order to execute
-the processing task. Initially, a new Application Package has no
-processing task defined but users can add as many as needed. From this
-tab, users, as shown in the <em>Editor Command Line Tool Tab</em> figure, can:</p>
+<p>The Command Line Tool tab of the editor section allows users to add one
+or more processing tasks in the Application Package.
+Command Line Tool properties may be entered manually using interactive
+forms, or copied and pasted from other sources.</p>
+<h5 id="creating-command-line-tool-definitions">Creating Command Line Tool Definitions</h5>
+<p>In order to manually define a new Command Line Tool in the Application
+Package, enter the "Command Line Tool" tab, then perform the following
+steps, as illustated in the <em>Editor Command Line Tool Tab</em> figure:</p>
 <ol>
-<li>Add a Command Line Tool (processing task) to the Application
-    Package.</li>
+<li>Click on the "Add Command Line Tool" button to create a new entry
+    in the Application Package.</li>
 <li>Define the class of the process, this value is always set to
     CommandLineTool in the case of Command Line Tool.</li>
 <li>An identifier for this processing task, this identifier is unique
@@ -815,6 +845,29 @@ tab, users, as shown in the <em>Editor Command Line Tool Tab</em> figure, can:</
 </ol>
 <p><img alt="Editor Command Line Tool Tab" src="../assets/user_manual/editor_commandLineTool.png" />
 <em><p style="text-align: center;">Editor Command Line Tool Tab</p></em></p>
+<h5 id="pasting-command-line-tool-definitions">Pasting Command Line Tool Definitions</h5>
+<p>In order to insert a Command Line Tool definition from another source
+(such as an offline CWL file) or the user interface of another tool,
+perform the following steps:</p>
+<ol>
+<li>Click on the "Paste Command Line Tool" button. This reveals a dialog
+   box containing a single input field, as illustrated on the
+   <em>Paste Command Line Tool Definition Form</em> figure.</li>
+<li>Paste the Command Line Tool definition in the text area. The editor
+   verifies that the text is a valid YAML document and that it contains
+   <code>class</code> and <code>id</code> properties with appropriate values.
+   If there is any issue, an error message is displayed below the text
+   area and the "Add" button remains disabled.</li>
+<li>If the Command Line Tool definition is valid, the "Add" button is
+   enabled. Click on it to create a new entry in the Command Line Tool
+   list.</li>
+<li>A notification suggests to verify that the properties have been
+   imported correctly.</li>
+<li>The pasted Command Line Tool definition may be further edited using
+   the interactive forms.</li>
+</ol>
+<p><img alt="Editor Paste Command Line Tool Definition" src="../assets/user_manual/editor_pasteCommandLineTool.png" />
+<em><p style="text-align: center;">Paste Command Line Tool Definition Form</p></em></p>
 <h4 id="workflow">Workflow</h4>
 <p>The Workflow tab of the editor section allows users to define the
 inputs, outputs and subprocess steps of the workflow. For each step that
