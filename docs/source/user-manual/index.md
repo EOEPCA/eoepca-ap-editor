@@ -24,6 +24,7 @@ An online version of this documentation is available at <https://eoepca.github.i
 | ------------------------  | ----------------------------- |
 | EO                        | Earth Observation             |
 | AP                        | Application Package           |
+| CLT                       | Command Line Tool            
 | CWL                       | Common Workflow Language      |
 | GUI                       | Graphical User Interface      |
 | ESA                       | European Space Agency         |
@@ -142,8 +143,8 @@ actions as can be seen in the *Helper Menu* figure:
     Packages Examples directly in the Editor. Users can use these
     examples as a starting template and save them after edition.
 -   **Guided Tours**: Provide users with a set of interactive guided
-    tours that describe and introduce the three main parts of the
-    editor: Metadata, Command Line Tool and Workflow.
+    tours that introduce the main sections and features of the editor:
+    Metadata, Command Line Tool (paste and create) and Workflow.
 
 ![Helper Menu](../assets/user_manual/help_menu.png)
 *<p style="text-align: center;">Helper Menu</p>*
@@ -264,15 +265,19 @@ well as the schema and namespace that are used in it.
 
 #### Command Line Tool
 
-The Command Line Tool tab of the editor section allows users to add
-multiple processing tasks with the definition of their executable name,
-inputs, outputs and requirements that must be met in order to execute
-the processing task. Initially, a new Application Package has no
-processing task defined but users can add as many as needed. From this
-tab, users, as shown in the *Editor Command Line Tool Tab* figure, can:
+The Command Line Tool tab of the editor section allows users to add one
+or more processing tasks in the Application Package.
+Command Line Tool properties may be entered manually using interactive
+forms, or copied and pasted from other sources.
 
-1.  Add a Command Line Tool (processing task) to the Application
-    Package.
+##### Creating Command Line Tool Definitions
+
+In order to manually define a new Command Line Tool in the Application
+Package, enter the "Command Line Tool" tab, then perform the following
+steps, as illustated in the *Editor Command Line Tool Tab* figure:
+
+1.  Click on the "Add Command Line Tool" button to create a new entry
+    in the Application Package.
 2.  Define the class of the process, this value is always set to
     CommandLineTool in the case of Command Line Tool.
 3.  An identifier for this processing task, this identifier is unique
@@ -295,6 +300,31 @@ tab, users, as shown in the *Editor Command Line Tool Tab* figure, can:
 
 ![Editor Command Line Tool Tab](../assets/user_manual/editor_commandLineTool.png)
 *<p style="text-align: center;">Editor Command Line Tool Tab</p>*
+
+##### Pasting Command Line Tool Definitions
+
+In order to insert a Command Line Tool definition from another source
+(such as an offline CWL file) or the user interface of another tool,
+perform the following steps:
+
+1. Click on the "Paste Command Line Tool" button. This reveals a dialog
+   box containing a single input field, as illustrated on the
+   *Paste Command Line Tool Definition Form* figure.
+2. Paste the Command Line Tool definition in the text area. The editor
+   verifies that the text is a valid YAML document and that it contains
+   `class` and `id` properties with appropriate values.
+   If there is any issue, an error message is displayed below the text
+   area and the "Add" button remains disabled.
+3. If the Command Line Tool definition is valid, the "Add" button is
+   enabled. Click on it to create a new entry in the Command Line Tool
+   list.
+4. A notification suggests to verify that the properties have been
+   imported correctly.
+5. The pasted Command Line Tool definition may be further edited using
+   the interactive forms.
+
+![Editor Paste Command Line Tool Definition](../assets/user_manual/editor_pasteCommandLineTool.png)
+*<p style="text-align: center;">Paste Command Line Tool Definition Form</p>*
 
 #### Workflow
 
