@@ -1,9 +1,5 @@
 # EO Application Package Editor
 
-Project documentation.
-
----
-
 The Application Package Editor is a web tool that provides user with an interactive editor for the 
 Common Workflow Language used for Application Packages. New users that are getting started with 
 this editor should start by reading with the provided [User Manual]. It gives many insights about the tool 

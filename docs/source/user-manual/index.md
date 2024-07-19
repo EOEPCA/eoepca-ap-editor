@@ -16,7 +16,7 @@ with it.
 
 **Online version**
 
-An online version of this documentation is available at <https://eoepca.readthedocs.io/projects/eo-app-package-editor/en/latest/>
+An online version of this documentation is available at <https://eoepca.readthedocs.io/projects/eo-app-package-editor/en/latest/user-manual/>
 
 **Abbreviations and Acronyms**
 
