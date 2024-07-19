@@ -11,6 +11,6 @@ Graphical User Interface as well as guidelines on how to create your first Appli
 
 **Online version**
 
-An online version of this documentation is available at <https://eoepca.github.io/eoepca-ap-editor/>
+An online version of this documentation is available at <https://eoepca.readthedocs.io/projects/eo-app-package-editor/en/latest/>
 
 [User Manual]: user-manual/index.md

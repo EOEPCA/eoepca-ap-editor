@@ -136,7 +136,7 @@
               <b-dropdown-item
                 @click="
                   openNewTab(
-                    'https://eoepca.github.io/eoepca-ap-editor/current/',
+                    'https://eoepca.readthedocs.io/projects/eo-app-package-editor/en/latest/',
                     $event
                   )
                 "

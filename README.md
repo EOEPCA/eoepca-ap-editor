@@ -6,7 +6,7 @@ build an Application Package following the
 
 The editor uses FastAPI for the Backend to manage user workspace and application package version and VueJS for the Frontend.
 
-The documentation can be found [here](https://eoepca.github.io/eoepca-ap-editor/current/).
+The documentation can be found [here](https://eoepca.readthedocs.io/projects/eo-app-package-editor/en/latest/).
 
 ## Development Environment
 
@@ -144,7 +144,7 @@ pulled from the repository. Subsequent executions take less time.
 
 ## Documentation
 
-See the [documentation page](https://eoepca.github.io/eoepca-ap-editor/current/) for the latest docs.
+See the [documentation page](https://eoepca.readthedocs.io/projects/eo-app-package-editor/en/latest/) for the latest docs.
 
 ## Useful links
 
