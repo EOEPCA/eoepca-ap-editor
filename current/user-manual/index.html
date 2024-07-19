@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://spaceapplications.github.io/eoepca-ap-editor/current/user-manual/">
+        <link rel="canonical" href="https://eoepca.readthedocs.io/projects/eo-app-package-editor/current/user-manual/">
       
       
         <link rel="prev" href="..">
@@ -22,7 +22,7 @@
     
     
       
-        <title>User Manual - Application Package Editor Documentation</title>
+        <title>User Manual - EO Application Package Editor</title>
       
     
     
@@ -44,6 +44,8 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
+    
+      <link rel="stylesheet" href="../css/eoepca.css">
     
       <link rel="stylesheet" href="../css/extra.css">
     
@@ -84,9 +86,9 @@
 
   
 
-<header class="md-header md-header--shadow" data-md-component="header">
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="Application Package Editor Documentation" class="md-header__button md-logo" aria-label="Application Package Editor Documentation" data-md-component="logo">
+    <a href=".." title="EO Application Package Editor" class="md-header__button md-logo" aria-label="EO Application Package Editor" data-md-component="logo">
       
   <img src="../img/favicon.ico" alt="logo">
 
@@ -99,7 +101,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Application Package Editor Documentation
+            EO Application Package Editor
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -134,11 +136,18 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
+          <a href="javascript:void(0)" class="md-search__icon md-icon" title="Share" aria-label="Share" data-clipboard data-clipboard-text="" data-md-component="search-share" tabindex="-1">
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7 0-.24-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9a3 3 0 0 0-3 3 3 3 0 0 0 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.15c-.05.21-.08.43-.08.66 0 1.61 1.31 2.91 2.92 2.91 1.61 0 2.92-1.3 2.92-2.91A2.92 2.92 0 0 0 18 16.08Z"/></svg>
+          </a>
+        
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
       
     </form>
     <div class="md-search__output">
@@ -156,26 +165,72 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/SpaceApplications/eoepca-ap-editor" title="Go to repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/EOEPCA/eoepca-ap-editor" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    SpaceApplications/eoepca-ap-editor
+    GitHub
   </div>
 </a>
       </div>
     
   </nav>
   
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://eoepca.readthedocs.io/" class="md-tabs__link">
+        
+  
+    
+  
+  EOEPCA Documentation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href=".." class="md-tabs__link">
+          
+  
+  EO Application Package Editor
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
 </header>
     
     <div class="md-container" data-md-component="container">
       
       
-        
-          
         
       
       <main class="md-main" data-md-component="main">
@@ -189,27 +244,27 @@
                     
 
 
-
   
 
-<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Application Package Editor Documentation" class="md-nav__button md-logo" aria-label="Application Package Editor Documentation" data-md-component="logo">
+    <a href=".." title="EO Application Package Editor" class="md-nav__button md-logo" aria-label="EO Application Package Editor" data-md-component="logo">
       
   <img src="../img/favicon.ico" alt="logo">
 
     </a>
-    Application Package Editor Documentation
+    EO Application Package Editor
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/SpaceApplications/eoepca-ap-editor" title="Go to repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/EOEPCA/eoepca-ap-editor" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    SpaceApplications/eoepca-ap-editor
+    GitHub
   </div>
 </a>
     </div>
@@ -223,11 +278,11 @@
   
   
     <li class="md-nav__item">
-      <a href=".." class="md-nav__link">
+      <a href="https://eoepca.readthedocs.io/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Home
+    EOEPCA Documentation
   </span>
   
 
@@ -238,6 +293,72 @@
     
       
       
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    EO Application Package Editor
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            EO Application Package Editor
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
   
   
     
@@ -426,30 +547,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Command Line Tool">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#creating-command-line-tool-definitions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Creating Command Line Tool Definitions
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pasting-command-line-tool-definitions" class="md-nav__link">
-    <span class="md-ellipsis">
-      Pasting Command Line Tool Definitions
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -496,9 +593,10 @@
     </li>
   
 
-    
-      
-      
+              
+            
+              
+                
   
   
   
@@ -516,6 +614,14 @@
     </li>
   
 
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
     
   </ul>
 </nav>
@@ -523,6 +629,209 @@
                 </div>
               </div>
             
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#general-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      General Concepts
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-package-creation-guidelines" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Package Creation Guidelines
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application-package-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application Package Editor
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Application Package Editor">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interface-overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Interface Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#header-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      Header Section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-management-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Management Section
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="File Management Section">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Validation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workspace-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workspace Actions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-transfer-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Local Transfer Actions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#combining-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Combining Actions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#editor-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      Editor Section
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Editor Section">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metadata
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#command-line-tool" class="md-nav__link">
+    <span class="md-ellipsis">
+      Command Line Tool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Workflow
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewer-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      Viewer Section
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#glossary" class="md-nav__link">
+    <span class="md-ellipsis">
+      Glossary
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
             
           
           
@@ -532,10 +841,15 @@
                   
 
   
+    <a href="https://github.com/EOEPCA/eoepca-ap-editor/edit/main/docs/user-manual/index.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
   
 
 
-<h1 id="user-manual">User Manual</h1>
+<h1 id="user-manual">User Manual<a class="headerlink" href="#user-manual" title="Permanent link">⚓︎</a></h1>
 <p><strong>Abstract</strong></p>
 <p>This document is the EO Application Package Editor User Manual. Its
 purpose is to describe the features and the capabilities supported by
@@ -573,7 +887,7 @@ with it.</p>
 </tbody>
 </table>
 <p><strong>Online version</strong></p>
-<p>An online version of this documentation is available at <a href="https://eoepca.github.io/eoepca-ap-editor/">https://eoepca.github.io/eoepca-ap-editor/</a></p>
+<p>An online version of this documentation is available at <a href="https://eoepca.readthedocs.io/projects/eo-app-package-editor/en/latest/">https://eoepca.readthedocs.io/projects/eo-app-package-editor/en/latest/</a></p>
 <p><strong>Abbreviations and Acronyms</strong></p>
 <table>
 <thead>
@@ -617,10 +931,10 @@ with it.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="introduction">Introduction</h2>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">⚓︎</a></h2>
 <p>This document describes the features and capabilities implemented in the
 EO Application Package Editor.</p>
-<h3 id="general-concepts">General Concepts</h3>
+<h3 id="general-concepts">General Concepts<a class="headerlink" href="#general-concepts" title="Permanent link">⚓︎</a></h3>
 <p>The Application Package Editor is an online web based tool for creating
 EO Application Packages in an interactive manner. The tool allows to
 create an Application Package and edit its three main parts as defined
@@ -657,7 +971,7 @@ versioned in the backend or downloaded as a CWL file. You can also
 select a stored Application Package version or upload a previously
 generated one which will automatically fill the editor with the
 Application Package content allowing further edition of the latter.</p>
-<h2 id="application-package-creation-guidelines">Application Package Creation Guidelines</h2>
+<h2 id="application-package-creation-guidelines">Application Package Creation Guidelines<a class="headerlink" href="#application-package-creation-guidelines" title="Permanent link">⚓︎</a></h2>
 <p>In general, creating a consistent new Application Package can be
 achieved by following these steps in the editor:</p>
 <ol>
@@ -674,8 +988,8 @@ achieved by following these steps in the editor:</p>
 <p>The metadata of the Application Package can be defined at any moment
 since the information that is set in it is not used by the Command Line
 Tool or Workflow parts.</p>
-<h2 id="application-package-editor">Application Package Editor</h2>
-<h3 id="interface-overview">Interface Overview</h3>
+<h2 id="application-package-editor">Application Package Editor<a class="headerlink" href="#application-package-editor" title="Permanent link">⚓︎</a></h2>
+<h3 id="interface-overview">Interface Overview<a class="headerlink" href="#interface-overview" title="Permanent link">⚓︎</a></h3>
 <p>The Application Package Editor Tool interface is divided in 4 distinct
 sections with their own purpose as shown in the <em>Editor GUI Overview</em> figure:</p>
 <ol>
@@ -696,7 +1010,7 @@ sections with their own purpose as shown in the <em>Editor GUI Overview</em> fig
 </ol>
 <p><img alt="Editor GUI Overview" src="../assets/user_manual/overview.png" />
 <em><p style="text-align: center;">Editor GUI Overview</p></em></p>
-<h3 id="header-section">Header Section</h3>
+<h3 id="header-section">Header Section<a class="headerlink" href="#header-section" title="Permanent link">⚓︎</a></h3>
 <p>The header section provides a helper menu from which users can change
 general settings of the Application Package Editor or open
 documentation, examples and guided tours on how to use the interactive
@@ -724,13 +1038,13 @@ actions as can be seen in the <em>Helper Menu</em> figure:</p>
 </ul>
 <p><img alt="Helper Menu" src="../assets/user_manual/help_menu.png" />
 <em><p style="text-align: center;">Helper Menu</p></em></p>
-<h3 id="file-management-section">File Management Section</h3>
+<h3 id="file-management-section">File Management Section<a class="headerlink" href="#file-management-section" title="Permanent link">⚓︎</a></h3>
 <p>The file management section provides users with a set of actions to
 perform on the Application Package CWL file that is generated/edited by
 the editor. The possible actions are shown in the <em>File Management Action</em> figure.</p>
 <p><img alt="File Management Actions" src="../assets/user_manual/file_manager_actions.png" />
 <em><p style="text-align: center;">File Management Actions</p></em></p>
-<h4 id="validation">Validation</h4>
+<h4 id="validation">Validation<a class="headerlink" href="#validation" title="Permanent link">⚓︎</a></h4>
 <p>The Validate button allows users at any moment during the editing of
 their Application Package to verify that the generated CWL file is valid
 against the CWL schema and the OGC BP EO Application Package requirements.
@@ -742,8 +1056,8 @@ notes.</p>
 <p>Clicking the Validate button performs the verification at error level. In
 that case the report may only contains errors, but not hints and notes.</p>
 <p>To obtain hints and notes, expand the Validate menu and select the entry
-corresponding to the desired level: "Include hints" or "Include hints and
-notes". In all cases, errors are detected.</p>
+corresponding to the desired level: &ldquo;Include hints&rdquo; or &ldquo;Include hints and
+notes&rdquo;. In all cases, errors are detected.</p>
 <p><img alt="Validation Menu" src="../assets/user_manual/validation_menu.png" />
 <em><p style="text-align: center;">Application Package Validation Menu</p></em></p>
 <p>When the validation report is not empty, this is displayed in a popup box.
@@ -754,7 +1068,7 @@ Each entry in the report is associated to the requirement that is not met.</p>
 that the Application Package CWL is valid.</p>
 <p><img alt="Validation Successful" src="../assets/user_manual/validation_successful.png" />
 <em><p style="text-align: center;">Application Package Validation Successful</p></em></p>
-<h4 id="workspace-actions">Workspace Actions</h4>
+<h4 id="workspace-actions">Workspace Actions<a class="headerlink" href="#workspace-actions" title="Permanent link">⚓︎</a></h4>
 <p>The Workspace Actions are directly responsible for managing and saving
 the Application Packages of the user in its workspace. Two actions are
 available:</p>
@@ -779,7 +1093,7 @@ available:</p>
 </ul>
 <p><img alt="Application Package Save Popup" src="../assets/user_manual/workspace_saver.png" />
 <em><p style="text-align: center;">Application Package Save Popup</p></em></p>
-<h4 id="local-transfer-actions">Local Transfer Actions</h4>
+<h4 id="local-transfer-actions">Local Transfer Actions<a class="headerlink" href="#local-transfer-actions" title="Permanent link">⚓︎</a></h4>
 <p>The Local Transfer Actions allow users to manage the Application Packages that
 are stored in their local storage. Two actions are available:</p>
 <ul>
@@ -790,17 +1104,17 @@ are stored in their local storage. Two actions are available:</p>
     Application Package that is currently open in the Application
     Package Editor Tool.</li>
 </ul>
-<h4 id="combining-actions">Combining Actions</h4>
+<h4 id="combining-actions">Combining Actions<a class="headerlink" href="#combining-actions" title="Permanent link">⚓︎</a></h4>
 <p>The Workspace and Local Transfer actions can be used together which mean that
 a user can open an Application Package from its local storage but then, after
 edition, choose to save it directly in its Workspace and vice versa.</p>
-<h3 id="editor-section">Editor Section</h3>
+<h3 id="editor-section">Editor Section<a class="headerlink" href="#editor-section" title="Permanent link">⚓︎</a></h3>
 <p>The Editor Section is the main section of the Application Package Editor
 Tool and consists of three parts named <strong>Metadata</strong>, <strong>Command Line
 Tool</strong> and <strong>Workflow</strong> as shown in the next figure. More information
 about these tabs are available by clicking the information icons next to
 the tab name.</p>
-<h4 id="metadata">Metadata</h4>
+<h4 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">⚓︎</a></h4>
 <p>The Metadata tab of the editor section allows users to enter/edit
 metadata information about the Application Package such as the CWL
 version, the creation date, the software version. etc. Some of these
@@ -811,17 +1125,17 @@ users can add authors and contributors for this Application Package as
 well as the schema and namespace that are used in it.</p>
 <p><img alt="Editor Metadata Tab" src="../assets/user_manual/editor_metadata.png" />
 <em><p style="text-align: center;">Editor Metadata Tab</p></em></p>
-<h4 id="command-line-tool">Command Line Tool</h4>
+<h4 id="command-line-tool">Command Line Tool<a class="headerlink" href="#command-line-tool" title="Permanent link">⚓︎</a></h4>
 <p>The Command Line Tool tab of the editor section allows users to add one
 or more processing tasks in the Application Package.
 Command Line Tool properties may be entered manually using interactive
 forms, or copied and pasted from other sources.</p>
-<h5 id="creating-command-line-tool-definitions">Creating Command Line Tool Definitions</h5>
+<h5 id="creating-command-line-tool-definitions">Creating Command Line Tool Definitions<a class="headerlink" href="#creating-command-line-tool-definitions" title="Permanent link">⚓︎</a></h5>
 <p>In order to manually define a new Command Line Tool in the Application
-Package, enter the "Command Line Tool" tab, then perform the following
+Package, enter the &ldquo;Command Line Tool&rdquo; tab, then perform the following
 steps, as illustated in the <em>Editor Command Line Tool Tab</em> figure:</p>
 <ol>
-<li>Click on the "Add Command Line Tool" button to create a new entry
+<li>Click on the &ldquo;Add Command Line Tool&rdquo; button to create a new entry
     in the Application Package.</li>
 <li>Define the class of the process, this value is always set to
     CommandLineTool in the case of Command Line Tool.</li>
@@ -838,27 +1152,27 @@ steps, as illustated in the <em>Editor Command Line Tool Tab</em> figure:</p>
 <li>Add the different outputs of the processing task with their id,
     type, and output bindings.</li>
 <li>Add the different requirements that must be met in order to execute
-    the processing task, for example, "DockerRequirement" can be set if
+    the processing task, for example, &ldquo;DockerRequirement&rdquo; can be set if
     a docker image is used in this processing task.</li>
 <li>Remove any Command Line Tool (processing task) that is not useful
     anymore to the Application Package.</li>
 </ol>
 <p><img alt="Editor Command Line Tool Tab" src="../assets/user_manual/editor_commandLineTool.png" />
 <em><p style="text-align: center;">Editor Command Line Tool Tab</p></em></p>
-<h5 id="pasting-command-line-tool-definitions">Pasting Command Line Tool Definitions</h5>
+<h5 id="pasting-command-line-tool-definitions">Pasting Command Line Tool Definitions<a class="headerlink" href="#pasting-command-line-tool-definitions" title="Permanent link">⚓︎</a></h5>
 <p>In order to insert a Command Line Tool definition from another source
 (such as an offline CWL file) or the user interface of another tool,
 perform the following steps:</p>
 <ol>
-<li>Click on the "Paste Command Line Tool" button. This reveals a dialog
+<li>Click on the &ldquo;Paste Command Line Tool&rdquo; button. This reveals a dialog
    box containing a single input field, as illustrated on the
    <em>Paste Command Line Tool Definition Form</em> figure.</li>
 <li>Paste the Command Line Tool definition in the text area. The editor
    verifies that the text is a valid YAML document and that it contains
    <code>class</code> and <code>id</code> properties with appropriate values.
    If there is any issue, an error message is displayed below the text
-   area and the "Add" button remains disabled.</li>
-<li>If the Command Line Tool definition is valid, the "Add" button is
+   area and the &ldquo;Add&rdquo; button remains disabled.</li>
+<li>If the Command Line Tool definition is valid, the &ldquo;Add&rdquo; button is
    enabled. Click on it to create a new entry in the Command Line Tool
    list.</li>
 <li>A notification suggests to verify that the properties have been
@@ -868,7 +1182,7 @@ perform the following steps:</p>
 </ol>
 <p><img alt="Editor Paste Command Line Tool Definition" src="../assets/user_manual/editor_pasteCommandLineTool.png" />
 <em><p style="text-align: center;">Paste Command Line Tool Definition Form</p></em></p>
-<h4 id="workflow">Workflow</h4>
+<h4 id="workflow">Workflow<a class="headerlink" href="#workflow" title="Permanent link">⚓︎</a></h4>
 <p>The Workflow tab of the editor section allows users to define the
 inputs, outputs and subprocess steps of the workflow. For each step that
 is added to the Workflow, the processing task as well as the mapping for
@@ -893,7 +1207,7 @@ users, as shown in the <em>Editor Workflow Tab</em> figure, can:</p>
 </ol>
 <p><img alt="Editor Workflow Tab" src="../assets/user_manual/editor_workflow.png" />
 <em><p style="text-align: center;">Editor Workflow Tab</p></em></p>
-<h3 id="viewer-section">Viewer Section</h3>
+<h3 id="viewer-section">Viewer Section<a class="headerlink" href="#viewer-section" title="Permanent link">⚓︎</a></h3>
 <p>The Viewer Section is focused on showing the corresponding Application
 Package CWL file that is being generated so that users can have a
 preview of the result before downloading or saving it. This view of the
@@ -902,7 +1216,7 @@ Note that the name of the Application Package as well as its version are
 shown at the top of this section, see the <em>CWL Viewer</em> figure.</p>
 <p><img alt="CWL Viewer" src="../assets/user_manual/cwl_viewer.png" />
 <em><p style="text-align: center;">CWL Viewer</p></em></p>
-<h2 id="glossary">Glossary</h2>
+<h2 id="glossary">Glossary<a class="headerlink" href="#glossary" title="Permanent link">⚓︎</a></h2>
 <p>In this section you will find the definition of the main concepts used
 in the EO Application Package Editor.</p>
 <table>
@@ -965,6 +1279,46 @@ in the EO Application Package Editor.</p>
       
         <footer class="md-footer">
   
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Introduction">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Introduction
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../architectural-design/" class="md-footer__link md-footer__link--next" aria-label="Next: Architectural Design">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Architectural Design
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -987,7 +1341,7 @@ in the EO Application Package Editor.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.instant", "navigation.tracking", "navigation.sections", "toc.integrate", "navigation.top"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.footer", "navigation.instant", "navigation.tracking", "navigation.tabs", "navigation.tabs.sticky", "navigation.sections", "navigation.top", "content.code.copy", "content.action.edit", "search.highlight", "search.share", "search.suggest"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"default": "latest", "provider": "mike"}}</script>
     
     
       <script src="../assets/javascripts/bundle.1e8ae164.min.js"></script>

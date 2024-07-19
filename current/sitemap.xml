@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://spaceapplications.github.io/eoepca-ap-editor/current/</loc>
-         <lastmod>2024-06-28</lastmod>
+         <loc>https://eoepca.readthedocs.io/projects/eo-app-package-editor/current/</loc>
+         <lastmod>2024-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://spaceapplications.github.io/eoepca-ap-editor/current/architectural-design/</loc>
-         <lastmod>2024-06-28</lastmod>
+         <loc>https://eoepca.readthedocs.io/projects/eo-app-package-editor/current/architectural-design/</loc>
+         <lastmod>2024-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://spaceapplications.github.io/eoepca-ap-editor/current/user-manual/</loc>
-         <lastmod>2024-06-28</lastmod>
+         <loc>https://eoepca.readthedocs.io/projects/eo-app-package-editor/current/user-manual/</loc>
+         <lastmod>2024-07-19</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
